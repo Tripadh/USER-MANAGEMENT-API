@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">UserManager</div>
+
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" id="adminLink" style="display:none;">Admin</a>
+    </div>
+
+    <button id="logoutBtn">Logout</button>
+  </nav>
+
+  <div class="container">
+    <h2>Welcome</h2>
+    <div class="card">
+      <p id="userInfo"></p>
+    </div>
+    <div id="adminSection" style="display:none;">
+  <h3>Admin Panel</h3>
+  <p>You have administrative privileges.</p>
+</div>
+
+  </div>
+  
+  <script type="module" src="pages/dashboard.js"></script>
+</body>
+</html>
