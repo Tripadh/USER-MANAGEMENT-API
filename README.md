@@ -1,101 +1,210 @@
-# User Management API
+# 🚀 User Management REST API with Role-Based Authentication
 
-A full-stack user management system built with Node.js, Express, MongoDB, and vanilla JavaScript frontend.
+A production-structured full-stack User Management system built using:
 
-## Features
-
-- User registration and authentication (JWT-based)
-- Role-based access control (User/Admin)
-- Secure password hashing with bcrypt
-- Input validation using express-validator
-- RESTful API design
-- Frontend dashboard with login, register, and profile pages
-
-## Tech Stack
-
-**Backend:**
 - Node.js
 - Express.js
-- MongoDB with Mongoose
-- JSON Web Tokens (JWT)
-- bcryptjs
+- MongoDB (Mongoose)
+- JWT Authentication
+- Role-Based Authorization
+- Vanilla JavaScript Frontend
 
-**Frontend:**
-- HTML5
-- CSS3
-- Vanilla JavaScript
+This project demonstrates secure authentication, role-based access control, and a clean backend architecture.
 
-## Project Structure
+---
+
+## 📌 Features
+
+### 🔐 Authentication
+- User Registration
+- User Login
+- JWT-based authentication
+- Password hashing using bcrypt
+- Token expiration handling
+
+### 🛡 Authorization
+- Role-based access control (`admin`, `user`)
+- Protected routes using middleware
+- Admin-only route protection
+
+### 🌐 Frontend
+- Login & Register UI
+- Dashboard for Users
+- Separate Admin Dashboard
+- Automatic redirect based on role
+- Token stored in localStorage
+- Protected frontend routes
+
+---
+
+## 🏗 Backend Architecture
 
 ```
 src/
-├── config/          # Database configuration
-├── controllers/     # Route controllers
-├── frontend/        # Frontend HTML, CSS, and JS
-├── middleware/      # Auth, role, validation middleware
-├── models/          # Mongoose models
-├── routes/          # API routes
-├── utils/           # Utility functions
-├── validators/      # Input validators
-├── app.js           # Express app setup
-└── server.js        # Server entry point
+│
+├── config/           # Database configuration
+├── controllers/      # Route controllers
+├── middleware/       # Auth, role & error middleware
+├── models/           # Mongoose models
+├── routes/           # API route definitions
+├── utils/            # Helper utilities
+├── validators/       # Request validation logic
+│
+├── app.js            # Express app configuration
+└── server.js         # Server entry point
 ```
 
-## API Endpoints
+### Key Backend Concepts Implemented
 
-### Authentication
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Login user |
-| GET | `/api/auth/profile` | Get user profile (protected) |
-| GET | `/api/auth/admin` | Admin access check (admin only) |
+- Layered architecture
+- Async handler pattern
+- Global error handling
+- Custom API error class
+- Input validation middleware
+- JWT payload role encoding
 
-### User Management (Admin Only)
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/users` | Get all users |
-| GET | `/api/users/:id` | Get user by ID |
-| PUT | `/api/users/:id/role` | Update user role |
-| DELETE | `/api/users/:id` | Delete user |
+---
 
-## Installation
+## 🎨 Frontend Structure
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Tripadh/USER-MANAGEMENT-API.git
-   cd USER-MANAGEMENT-API
-   ```
+```
+src/frontend/
+│
+├── css/
+│   └── main.css
+│
+├── pages/
+│   ├── login.js
+│   ├── register.js
+│   ├── dashboard.js
+│   ├── admin-dashboard.js
+│   └── auth.js
+│
+├── login.html
+├── register.html
+├── dashboard.html
+└── admin-dashboard.html
+```
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+---
 
-3. Create a `.env` file in the root directory:
-   ```env
-   PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret_key
-   ```
+## 🔑 Role-Based Flow
 
-4. Start the server:
-   ```bash
-   # Development mode
-   npm run dev
+### Register
+- Default role assigned: `user`
 
-   # Production mode
-   npm start
-   ```
+### Login
+- Backend verifies credentials
+- JWT issued with role inside payload
+- Frontend decodes role
+- Redirect logic:
+  - `admin` → `admin-dashboard.html`
+  - `user` → `dashboard.html`
 
-## Environment Variables
+---
 
-| Variable | Description |
-|----------|-------------|
-| `PORT` | Server port (default: 5000) |
-| `MONGODB_URI` | MongoDB connection string |
-| `JWT_SECRET` | Secret key for JWT signing |
+## 🧪 API Endpoints
 
-## License
+### Auth Routes
+```
+POST   /api/v1/auth/register
+POST   /api/v1/auth/login
+```
 
-ISC
+### User Routes
+```
+GET    /api/v1/users/profile       (Protected)
+GET    /api/v1/users/admin-route   (Admin Only)
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/Tripadh/USER-MANAGEMENT-API.git
+cd USER-MANAGEMENT-API
+```
+
+### 2️⃣ Install dependencies
+
+```bash
+npm install
+```
+
+### 3️⃣ Setup environment variables
+
+Create `.env` file:
+
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+JWT_EXPIRES_IN=1d
+```
+
+### 4️⃣ Run the server
+
+```bash
+npm run dev
+```
+
+Server runs at:
+
+```
+http://localhost:5000
+```
+
+---
+
+## 🔐 Security Considerations
+
+* Passwords hashed with bcrypt
+* JWT expiration enforced
+* Role-based middleware protection
+* Frontend role checks are UI-only
+* Backend enforces real authorization
+
+---
+
+## 📦 Tech Stack
+
+**Backend:**
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+* JWT
+* bcrypt
+
+**Frontend:**
+* HTML
+* CSS
+* Vanilla JavaScript
+* Fetch API
+
+---
+
+## 🚀 Future Improvements
+
+* Refresh token implementation
+* HttpOnly cookie-based authentication
+* React frontend upgrade
+* User management table for admin
+* Pagination & search
+* Docker containerization
+* Deployment to cloud (Render / Railway / AWS)
+
+---
+
+## 👨‍💻 Author
+
+Built as a full-stack architecture learning project.
+
+---
+
+## 📜 License
+
+MIT License
